@@ -14,5 +14,11 @@
     cursor: pointer;
 }
 .x {
+    margin-left: 2px;
+}
+
+img {
+    width: 20px;
     margin-left: 60px;
+    cursor: pointer;
 }

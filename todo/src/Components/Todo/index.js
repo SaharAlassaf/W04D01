@@ -9,12 +9,25 @@ class Todo extends Component {
             todos: [
                 {id: 1, name:"Work"},
                 {id: 2, name:"Sleep"}
-            ]
+            ],
+            color: "red"
         }
     }
 
     handleDelete = (id) => {
-        this.setState( {todos: this.state.todos.filter(todo => todo.id != id)})
+        this.setState( {todos: this.state.todos.filter(todo => todo.id !== id)} );
+    }
+
+    handleEdit = (id) => {
+        const newName = prompt("Change the task");
+        const newarr = this.state.todos.map(todo => {
+            if(id == todo.id){
+                return {... todo, name: newName}
+            } else{
+                return todo;
+            }
+        });
+        this.setState({todos: newarr});
     }
 
     handleSubmit = (e) => {
@@ -25,7 +38,7 @@ class Todo extends Component {
                 id: this.state.todos.length + 1,
                 name: e.target.task.value
             }
-            this.setState( {todos:[... this.state.todos, todo]})
+            this.setState( {todos:[... this.state.todos, todo]} );
         }
         e.target.task.value = "";
     }
@@ -39,7 +52,7 @@ class Todo extends Component {
                 </form>
                 <ul className="ul">
                     {this.state.todos.map((todo, i) =>
-                        <TodoItem todo={todo} key={i} handleDelete={this.handleDelete}/>
+                        <TodoItem todo={todo} key={i} handleDelete={this.handleDelete} handleEdit={this.handleEdit}/>
                     )}
                 </ul>
             </div>
